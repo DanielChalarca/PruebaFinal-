@@ -97,6 +97,15 @@ Once the application is running:
 
 **Swagger UI:** http://localhost:3000/api/docs
 
+### Import to Postman
+
+1. Open http://localhost:3000/api/docs-json in your browser
+2. Copy all the JSON (Ctrl+A, Ctrl+C)
+3. Open Postman and click "Import"
+4. Select "Raw text" tab
+5. Paste the JSON and click "Continue"
+6. Click "Import"
+
 ## Main Endpoints
 
 ### Authentication
