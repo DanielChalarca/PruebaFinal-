@@ -38,15 +38,15 @@ export class TicketsService {
       throw new NotFoundException('Cliente no encontrado');
     }
 
-    let technician = null;
+    let technician: Technician | undefined;
     if (createTicketDto.technicianId) {
-      technician = await this.technicianRepository.findOne({
+      const foundTechnician = await this.technicianRepository.findOne({
         where: { id: createTicketDto.technicianId },
       });
-      if (!technician) {
+      if (!foundTechnician) {
         throw new NotFoundException('Técnico no encontrado');
       }
-
+      technician = foundTechnician;
       await this.validateTechnicianWorkload(createTicketDto.technicianId);
     }
 
@@ -155,7 +155,7 @@ export class TicketsService {
   }
 
   private validateStatusTransition(currentStatus: TicketStatus, newStatus: TicketStatus) {
-    const validTransitions = {
+    const validTransitions: Record<TicketStatus, TicketStatus[]> = {
       [TicketStatus.OPEN]: [TicketStatus.IN_PROGRESS],
       [TicketStatus.IN_PROGRESS]: [TicketStatus.RESOLVED],
       [TicketStatus.RESOLVED]: [TicketStatus.CLOSED],

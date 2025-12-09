@@ -46,7 +46,7 @@ export class Ticket {
 
   @ManyToOne(() => Technician, (technician) => technician.tickets, { nullable: true, onDelete: 'SET NULL' })
   @JoinColumn({ name: 'technicianId' })
-  technician: Technician;
+  technician?: Technician;
 
   @Column({ nullable: true })
   technicianId: string;

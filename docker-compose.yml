@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: techhelpdesk-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: techhelpdesk
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - techhelpdesk-network
+
+  api:
+    build: .
+    container_name: techhelpdesk-api
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: techhelpdesk
+      JWT_SECRET: your-secret-key-change-in-production
+      JWT_EXPIRATION: 24h
+    depends_on:
+      - postgres
+    networks:
+      - techhelpdesk-network
+
+volumes:
+  postgres_data:
+
+networks:
+  techhelpdesk-network:
+    driver: bridge

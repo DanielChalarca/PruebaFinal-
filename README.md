@@ -17,11 +17,51 @@ API REST para gestión de tickets de soporte técnico construida con NestJS, Typ
 
 ## 📋 Requisitos
 
+### Opción 1: Instalación Local
 - Node.js >= 16
 - PostgreSQL >= 12
 - npm o yarn
 
-## 🔧 Instalación
+### Opción 2: Con Docker (Recomendado)
+- Docker
+- Docker Compose
+
+## 🐳 Instalación con Docker (Recomendado)
+
+### Inicio Rápido
+
+```bash
+# Levantar todos los servicios
+docker-compose up -d
+
+# Esperar 30 segundos y ejecutar seeders
+docker-compose exec api npm run seed
+
+# Acceder a Swagger
+# http://localhost:3000/api/docs
+```
+
+### Comandos Docker
+
+```bash
+# Ver logs
+docker-compose logs -f
+
+# Detener servicios
+docker-compose down
+
+# Reiniciar servicios
+docker-compose restart
+
+# Ver contenedores
+docker-compose ps
+```
+
+**Ver más:** [DOCKER_INSTRUCCIONES.md](DOCKER_INSTRUCCIONES.md)
+
+---
+
+## 🔧 Instalación Local
 
 1. **Clonar el repositorio e instalar dependencias:**
 
